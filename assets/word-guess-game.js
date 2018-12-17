@@ -1,32 +1,79 @@
 // Word Guess Game with 80s bands
+window.onload = function() {
 
-var bandNames = ["GENESIS", "AEROSMITH", "BLONDIE", "REM", "U2", "SPRINGSTEEN", "PRINCE", "MADONNA", "BONJOVI", "BALTIMORA", 
-  "BANANARAMA", "HEART", "EURYTHMICS", "FOREIGNER", "INXS","STING","STYX","KISS","DIO","UB40","EUROPE"];
+var bandNames = ["genesis", "aerosmith", "blondie", "prince", "madonna", "bon jovi", "baltimora",  "toto", "rush"];
 var bandNameArray = [];
+var wins = 0;
+var losses = 0;
 var max = bandNames.length;
+var guesses = [];
+var guessesAllowed = 10;
+var displayArray = []; //Two dimensional array to keep current answer along with the empty spaces representing the unguessed word(s)
+var unguessedAnswer = [];
+var guessedLetters = [];
 
-function getRandomInt(min, max) {
+document.addEventListener('keypress', guess);
+//document.getElementById('guesses').innerHTML = guessesAllowed;
+document.getElementById("wins").innerHTML = wins;
+
+function getRandomInt(min, max) {  // get random number
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-var randomBandNum = getRandomInt(1, max) - 1;
+var randomBandNum = getRandomInt(0, max);
 //console.log(randomBandNum + " a random index num for band " + bandNames[randomBandNum]);
 console.log(bandNames[randomBandNum].split(""));
  
 for(var i = 0; i < bandNames[randomBandNum].length; i++) {
   bandNameArray.push(bandNames[randomBandNum][i]);
-  document.write(bandNameArray[i] + "__");
 }
-console.log(bandNameArray + " this is band name array ");
-
-//
-document.onkeyup = function(event) {
-  // console.log("key pressed " + event.key);
-  var keyPressed = event.key.toUpperCase();  // this will convert to lower case so 
-  if(event.key === bandNameArray[0]) {
-    document.write(" this is the first letter of the band ")
+//console.log(bandNameArray + " this is band name array ");
+for(var i = 0; i < bandNameArray.length; i++) { //Build displayArray to keep two dimensions of correct answer and unguessed spaces.
+  if(bandNameArray[i] === " ") {
+    combine = [" "];
+    displayArray.push(combine);
+  } else {
+    combine = ["_"];
+    displayArray.push(combine);
   }
 }
 
+// for(var i = 0; i < displayArray.length; i++) {
+//   unguessedAnswer = unguessedAnswer + displayArray[i][1];
+// }
+
+function guess() {
+  input = event.key;
+  if(guessedLetters.includes(input)) {
+    alert("You have already guessed this letter! ")
+  }
+  if(bandNameArray.includes(input)) {
+    //document.getElementById("guessed").innerHTML = guessedLetters;
+    //document.getElementById("answer").innerHTML = input.toUpperCase();
+    for (var i = 0; i < bandNameArray.length; i++) {
+      if (input == bandNameArray[i]) {
+        displayArray[i] = input;
+        screenDisplay = displayArray;
+       //document.getElementById("answer").innerHTML = screenDisplay;
+       document.getElementById("answer").innerHTML = screenDisplay.join(" ")
+      }
+    }
+    guessedLetters.push(input);
+    document.getElementById("guessed").innerHTML = guessedLetters;
+  } else {
+    if(guessedLetters.includes(input)) {
+      guessedLetters.push(input);
+      document.getElementById("guessed").innerHTML = guessedLetters;
+    } else {
+      //guessedLetters.push(input);
+      //console.log(guessedLetters + " these are guessed letters ");
+    }
+  }
+}
+
+
+//document.getElementById("displayArray").innerHTML = displayArray.join(" ");
+
+}
