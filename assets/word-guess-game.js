@@ -18,21 +18,23 @@ document.addEventListener('keypress', guess);
 //document.getElementById('guesses').innerHTML = guessesAllowed;
 document.getElementById("wins").innerHTML = wins;
 
-function getRandomInt(min, max) {  // get random number
+// get random number
+function getRandomInt(min, max) {  
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 var randomBandNum = getRandomInt(0, max);
-//console.log(randomBandNum + " a random index num for band " + bandNames[randomBandNum]);
 console.log(bandNames[randomBandNum].split(""));
  
+//Take the randomly generated band name and push into its own array
 for(var i = 0; i < bandNames[randomBandNum].length; i++) {
   bandNameArray.push(bandNames[randomBandNum][i]);
 }
-//console.log(bandNameArray + " this is band name array ");
-for(var i = 0; i < bandNameArray.length; i++) { //Build displayArray to keep two dimensions of correct answer and unguessed spaces.
+
+//Build displayArray to keep unguessed spaces
+for(var i = 0; i < bandNameArray.length; i++) { 
   if(bandNameArray[i] === " ") {
     combine = [" "];
     displayArray.push(combine);
@@ -42,17 +44,14 @@ for(var i = 0; i < bandNameArray.length; i++) { //Build displayArray to keep two
   }
 }
 document.getElementById("answer").innerHTML = displayArray.join(" ");
-// for(var i = 0; i < displayArray.length; i++) {
-//   unguessedAnswer = unguessedAnswer + displayArray[i][1];
-// }
+
+//function to keep logic for when a user guesses a letter
 function guess() {
   input = event.key;
   if(guessedLetters.includes(input)) {
     alert("You have already guessed this letter! ");
   }
-  if(bandNameArray.includes(input)) {
-    //document.getElementById("guessed").innerHTML = guessedLetters;
-    //document.getElementById("answer").innerHTML = input.toUpperCase();
+  if(bandNameArray.includes(input)) {  // a correct guess
     for (var i = 0; i < bandNameArray.length; i++) {
       if (input == bandNameArray[i]) {
         displayArray[i] = input;
@@ -61,30 +60,29 @@ function guess() {
       }
     }
     var underscoreCounter = 0;
+    console.log(screenDisplay[1] + " screen display ")
     for (var i = 0; i < screenDisplay.length; i++) {
-      if(screenDisplay[i] === "_") {
+      if(screenDisplay[i] == "_") {
         underscoreCounter = underscoreCounter + 1;
+        console.log(underscoreCounter + " underscore counter ")
       }
-      if (underscoreCounter === 0) {
-        gameWon = true;
+      if (underscoreCounter == 0) {
+        var gameWon = true;
       }
+      console.log(underscoreCounter + " underscore counter 2  and game won " + gameWon)
     }
     guessedLetters.push(input);
     document.getElementById("guessed").innerHTML = guessedLetters;
-  } else {
+  
+  } else { // an incorrect guess
       guessedLetters.push(input);
       document.getElementById("guessed").innerHTML = guessedLetters;
     }
   }
-  //console.log(gameWon + " game won?");
-  //console.log(bandNameArray + " this is band name array ");
   
   if (gameWon) {
     win = win + 1;
     document.getElementById("wins").innerHTML = wins;
     alert("congrats you won!");
   }
-
-
 }
-//document.getElementById("displayArray").innerHTML = displayArray.join(" ");
