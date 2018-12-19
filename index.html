@@ -3,30 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>Word Guess Game</title>
-    <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script type="text/javascript" src="assets/word-guess-game.js"></script>
+    <!-- <script type="text/javascript" src="assets/data.js"></script> -->
  
 </head>
+
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                    <h1>Word Guess Game</h1>
+        <header>
+            <div class="row bg-dark">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6 text-center">
+                    <h1>Musical Word Guess Game</h1>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9">
+        </header>
+ 
+        <div class="row bg-light justify-content-center">
+            <div class="col-sm-3">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 text-center mb-3 mt-3">
+                        <h4>Select Helpers<h4>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="custom-control custom-checkbox mb-3 ml-3">
+                            <input type="checkbox" class="custom-control-input" id="quotes">
+                            <label class="custom-control-label" for="quotes">Song Title</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3 ml-3">
+                            <input type="checkbox" class="custom-control-input" id="pictures">
+                            <label class="custom-control-label" for="pictures">Pictures</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3 ml-3">
+                            <input type="checkbox" class="custom-control-input" id="obscura">
+                            <label class="custom-control-label" for="obscura">Obscura</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3 ml-3">
+                            <input type="checkbox" class="custom-control-input" id="genre">
+                            <label class="custom-control-label" for="genre">Genre</label>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-sm-6 text-center">
                 <h5>Press Any Key To Start</h5>
-                <h4>Guess this word: </h4>
-                <h1 id="answer" style="letter-spacing: 15px;"></h1>
+                <h3>Guess this word: </h3>
+                <h1 id="answer" style="letter-spacing: 10px;"></h1>
 
-                <h4>Wins: </h4>
+                <span><h4>Wins: </h4></span>
                 <span id="wins"></span>
                 <!-- <span id="displayArray"></span> -->
-                <p>Here is what you have guessed so far: </p>
+                <h4>Here is what you have guessed so far: </h4>
                 <h4 id="guessed"></h4>
+                <h4>Turns remaining:</h4>
+                <h4 id="remaining"></h4>
+            </div>
+            <div class="col-sm-3">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 text-center mb-3 mt-3">
+                        <h1>Hints</h1>
+                           
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Song Title:</h4>
+                        <h5 id="hint1"></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Musical Genre:</h4>
+                        <h5 id="hint2"></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Fun Fact</h4>
+                        <h5 id="hint5"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-light justify-content-center">
+            <div class="col-sm-12 text-center">
+                <!-- <img id="hint4"/> -->
             </div>
         </div>
     </div>
